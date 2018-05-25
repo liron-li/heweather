@@ -123,7 +123,8 @@ class Base
     public function get($url, $parameters)
     {
         $url .= '?' . http_build_query($parameters);
-        return $this->http->get($url, $this->options)->getBody()->getContents();
+        $response = $this->http->get($url, $this->options)->getBody()->getContents();
+        return $this->ret($response);
     }
 
     /**
@@ -145,5 +146,15 @@ class Base
         $slug = $this->paying ? 'paying' : 'free';
         $key = $method . '.' . $slug;
         return Arr::get($this->api, $key);
+    }
+
+    /**
+     * return response
+     * @param $response
+     * @return mixed
+     */
+    public function ret($response)
+    {
+        return json_decode($response, true);
     }
 }
