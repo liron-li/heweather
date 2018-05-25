@@ -36,12 +36,14 @@ class Base
      * Base constructor.
      * @param $username
      * @param $key
+     * @param bool $paying
      */
-    public function __construct($username, $key)
+    public function __construct($username, $key, $paying = false)
     {
         $this->http = new Client();
         $this->username = $username;
         $this->key = $key;
+        $this->signing($paying);
     }
 
     /**
