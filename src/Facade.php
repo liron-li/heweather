@@ -1,6 +1,7 @@
-<?php namespace Barryvdh\Debugbar;
+<?php
 
-use Liron\Heweather\Weather;
+namespace Liron\Heweather;
+
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
