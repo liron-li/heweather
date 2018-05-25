@@ -43,7 +43,7 @@ class Base
         $this->http = new Client();
         $this->username = $username;
         $this->key = $key;
-        $this->signing($paying);
+        $this->paying($paying);
     }
 
     /**
@@ -112,7 +112,10 @@ class Base
             $parameters['t'] = time();
             $parameters['username'] = $this->username;
             $parameters['sign'] = $this->getSignature($parameters);
+        } else {
+            $parameters['key'] = $this->key;
         }
+
         $url = $this->getApiUrl($method);
         return $this->{$this->getMethod($method)}($url, $parameters);
     }
@@ -147,6 +150,7 @@ class Base
     {
         $slug = $this->paying ? 'paying' : 'free';
         $key = $method . '.' . $slug;
+
         return Arr::get($this->api, $key);
     }
 
