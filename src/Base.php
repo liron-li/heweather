@@ -151,7 +151,7 @@ class Base
         $slug = $this->paying ? 'paying' : 'free';
         $key = $method . '.' . $slug;
 
-        return Arr::get($this->api, $key);
+        return Arr::get($this->api, $key) ?: Arr::get($this->api, $method . '.paying');
     }
 
     /**
